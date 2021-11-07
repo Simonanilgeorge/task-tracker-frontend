@@ -5,7 +5,7 @@
 
 
             <input type="text" formControlName="name" placeholder="name">
-            <input type="number" formControlName="price" placeholder="price">
+            <input type="number" formControlName="price" placeholder="price" step="0.01">
             <input type="number" formControlName="quantity" placeholder="quantity">
             <button class="button submit" (click)="addStock()" [class.disabled]="!form.valid"
                 [disabled]="!form.valid">add stock</button>
@@ -16,11 +16,26 @@
 
         <div class="stats-container card">
             <h1>Stats</h1>
-            <span *ngIf="stats!=null">
-                <!-- <h1 *ngFor="let title of titles">
-                    {{title}} {{stats[title]}}
-                </h1> -->
-            </span>
+
+            <div *ngIf="selectedData!=null" class="status-info-container">
+
+
+
+                <form class="box info-form" [formGroup]="sellForm" >
+                    <input type="number" formControlName="currentAmount" placeholder="current value">
+                    <button class="button default" (click)="calculate()" [class.disabled]="!sellForm.valid"
+                    [disabled]="!sellForm.valid">calculate</button>
+                </form>
+
+            <div class="box" >
+                <h3 *ngFor="let title of getTitles(selectedData)">
+                    {{title}} : {{selectedData[title]}}
+                </h3>
+                <h3 *ngFor="let title of getTitles(stats)">
+                    {{title}} : {{stats[title]}}
+                </h3>
+            </div>
+            </div>
         </div>
 
         <div class="table-container card">

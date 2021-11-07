@@ -52,12 +52,16 @@ min-height: 100vh;
   background: green;
 }
 
+.default{
+  background:steelblue;
+}
+
 .submit:hover {
   background: rgb(7, 87, 7);
 }
 
 .disabled {
-  background: rgb(146, 202, 158);
+opacity: 0.6;
 
   pointer-events: none;
 }
@@ -78,7 +82,7 @@ input {
   /* border-radius: 1em; */
   display: inline-block;
   overflow: auto;
-  height: 17em;
+  max-height: 17em;
 
 
   /* box-shadow: 1px 3px 4px 0px grey; */
@@ -109,5 +113,10 @@ td {
 
 h1 {
   font-weight: lighter;
+  text-transform: uppercase;
+}
+
+h3{
+  font-weight: 300;
   text-transform: uppercase;
 }

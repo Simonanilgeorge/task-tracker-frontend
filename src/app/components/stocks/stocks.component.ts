@@ -10,8 +10,13 @@ import { Validators, FormBuilder, FormArray, FormGroup } from '@angular/forms';
 })
 export class StocksComponent implements OnInit {
 
-  stats = null;
-
+  selectedData = null
+  stats={
+    percentage:null,
+    totalSellAmount:null,
+    difference:null
+  }
+  titles:string[]=[]
 
   additionalFeatures={ 
     grandTotal:{
@@ -29,6 +34,10 @@ export class StocksComponent implements OnInit {
     quantity: [{ value: null, disabled: false }, [Validators.min(1), Validators.required]],
     buyAmount: [{ value: null, disabled: false }],
   })
+
+sellForm=this.fb.group({
+  currentAmount:[{value:null,disabled:false},Validators.required]
+})
 
   constructor(private stockService: StocksService, private fb: FormBuilder) { }
 
@@ -54,6 +63,9 @@ export class StocksComponent implements OnInit {
     return this.form.get("buyAmount")
   }
 
+  get currentAmount():number|any{
+    return this.sellForm.get("currentAmount")
+  }
 
 
   addStock() {
@@ -68,6 +80,7 @@ export class StocksComponent implements OnInit {
 
       this.form.reset()
       this.getAllStocks()
+
       console.log(res)
     })
   }
@@ -75,14 +88,35 @@ export class StocksComponent implements OnInit {
   getAllStocks() {
     this.stockService.getAllStocks().subscribe((res) => {
       this.data = res.message
+      // this.titles = Object.keys(this.data[0])
+      this.selectedData=this.data[0];
     })
   }
 
   getStats(data) {
     console.log(data)
-    this.stats = data
+    this.selectedData = data
+    this.sellForm.reset()
+
   }
 
+
+  calculate(){
+
+
+    this.stats.percentage=((this.currentAmount.value-this.selectedData.price)/this.selectedData.price)*100
+    this.stats.totalSellAmount=this.selectedData.quantity*this.currentAmount.value
+    this.stats.difference=this.stats.totalSellAmount-this.selectedData["buy amount"]
+
+    console.log(this.stats)
+
+
+  }
+
+  getTitles(data){
+
+    return Object.keys(data)
+  }
 
 
 }

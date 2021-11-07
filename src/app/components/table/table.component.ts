@@ -26,19 +26,20 @@ export class TableComponent implements OnInit {
     this.titles = Object.keys(this.data[0])
     if(this.additionalFeatures.grandTotal.enabled){
       this.additionalFeatures.grandTotal.keys.forEach((key)=>{
+
         this.grandTotal[key] = this.data.map((data) => data[key]).reduce((a, b) => a + b)
       })
       
     }
 
-    console.log(this.additionalFeatures.grandTotal.enabled)
+
   }
 
 
 
   sort(title){
 
-    console.log(this.data)
+
     this.sortFlag=!this.sortFlag
     this.data=this.data.sort((a,b)=>{
       if(this.sortFlag){

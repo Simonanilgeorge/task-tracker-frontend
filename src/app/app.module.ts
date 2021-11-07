@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { StocksComponent } from './components/stocks/stocks.component';
 import { TableComponent } from './components/table/table.component';
+import { ToastComponent } from './components/toast/toast.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     StocksComponent,
-    TableComponent
+    TableComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
