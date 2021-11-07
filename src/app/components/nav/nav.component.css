@@ -1,0 +1,35 @@
+
+
+nav{
+
+    padding: 1em;
+    display: flex;
+    background: var(--navbar-bg);
+    gap:2em;
+}
+
+p{
+    /* border:1px solid black; */
+    padding:1em 0;
+    font-weight: bolder;
+    cursor: pointer;
+    position:relative;
+    transition:100ms ease-in-out;
+}
+p::before{
+    position: absolute;
+    content: "";
+    left:0;
+    bottom: 0;
+    width: 0%;
+    height:0.1em;
+    background: #62210d;
+    transition:300ms ease-in-out;
+}
+p:hover{
+    color: #62210d;
+}
+p:hover::before {
+    width: 100%;
+
+}

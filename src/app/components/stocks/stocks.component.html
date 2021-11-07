@@ -1,0 +1,34 @@
+<div class="container">
+    <app-nav></app-nav>
+    <div class="grid-container">
+        <div class="form card" [formGroup]="form">
+
+
+            <input type="text" formControlName="name" placeholder="name">
+            <input type="number" formControlName="price" placeholder="price">
+            <input type="number" formControlName="quantity" placeholder="quantity">
+            <button class="button submit" (click)="addStock()" [class.disabled]="!form.valid"
+                [disabled]="!form.valid">add stock</button>
+            <!-- <button class="button submit" (click)="test()">test</button> -->
+        </div>
+
+
+
+        <div class="stats-container card">
+            <h1>Stats</h1>
+            <span *ngIf="stats!=null">
+                <!-- <h1 *ngFor="let title of titles">
+                    {{title}} {{stats[title]}}
+                </h1> -->
+            </span>
+        </div>
+
+        <div class="table-container card">
+            <span *ngIf="data.length!=0">
+                <app-table [data]="data" [additionalFeatures]="additionalFeatures" (selectedData)="getStats($event)"></app-table>
+            </span>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,30 @@
+input {
+  text-transform: uppercase;
+}
+
+.grid-container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(1, 0.4fr 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  padding: 0.5em;
+  gap: 0.5em;
+  grid-template-areas:
+    "form stats-container"
+    "table-container table-container";
+}
+
+.form {
+  grid-area: form;
+}
+
+.table-container {
+  grid-area: table-container;
+  align-self: flex-start;
+}
+
+.stats-container {
+  grid-area: stats-container;
+
+  padding: 1em;
+}
