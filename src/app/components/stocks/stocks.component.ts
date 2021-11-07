@@ -10,24 +10,32 @@ import { Validators, FormBuilder, FormArray, FormGroup } from '@angular/forms';
 })
 export class StocksComponent implements OnInit {
 
-  selectedData = null
-  stats={
-    percentage:null,
-    totalSellAmount:null,
-    difference:null
-  }
-  titles:string[]=[]
 
-  additionalFeatures={ 
-    grandTotal:{
-      enabled:true,
-      keys:["buy amount","quantity","price"]
+  toast={
+    active:false,
+    message:null,
+    severity:null
+  }
+
+  selectedData = null
+
+  stats = {
+    percentage: null,
+    totalSellAmount: null,
+    difference: null
+  }
+  titles: string[] = []
+
+  additionalFeatures = {
+    grandTotal: {
+      enabled: true,
+      keys: ["buy amount", "quantity", "price"]
     },
-    sort:true
+    sort: true
   }
 
   data = []
-  message: string = ""
+
   form = this.fb.group({
     name: [{ value: "", disabled: false }, Validators.required],
     price: [{ value: null, disabled: false }, [Validators.required, Validators.min(0)]],
@@ -35,9 +43,9 @@ export class StocksComponent implements OnInit {
     buyAmount: [{ value: null, disabled: false }],
   })
 
-sellForm=this.fb.group({
-  currentAmount:[{value:null,disabled:false},Validators.required]
-})
+  sellForm = this.fb.group({
+    currentAmount: [{ value: null, disabled: false }, Validators.required]
+  })
 
   constructor(private stockService: StocksService, private fb: FormBuilder) { }
 
@@ -63,7 +71,7 @@ sellForm=this.fb.group({
     return this.form.get("buyAmount")
   }
 
-  get currentAmount():number|any{
+  get currentAmount(): number | any {
     return this.sellForm.get("currentAmount")
   }
 
@@ -78,6 +86,7 @@ sellForm=this.fb.group({
 
     this.stockService.addStock(this.form.getRawValue()).subscribe((res) => {
 
+      this.showToastMessage("stock added","success")
       this.form.reset()
       this.getAllStocks()
 
@@ -89,7 +98,7 @@ sellForm=this.fb.group({
     this.stockService.getAllStocks().subscribe((res) => {
       this.data = res.message
       // this.titles = Object.keys(this.data[0])
-      this.selectedData=this.data[0];
+      this.selectedData = this.data[0];
     })
   }
 
@@ -101,21 +110,35 @@ sellForm=this.fb.group({
   }
 
 
-  calculate(){
+  calculate() {
 
 
-    this.stats.percentage=((this.currentAmount.value-this.selectedData.price)/this.selectedData.price)*100
-    this.stats.totalSellAmount=this.selectedData.quantity*this.currentAmount.value
-    this.stats.difference=this.stats.totalSellAmount-this.selectedData["buy amount"]
+    this.stats.percentage = ((this.currentAmount.value - this.selectedData.price) / this.selectedData.price) * 100
+    this.stats.totalSellAmount = this.selectedData.quantity * this.currentAmount.value
+    this.stats.difference = this.stats.totalSellAmount - this.selectedData["buy amount"]
 
     console.log(this.stats)
 
 
   }
 
-  getTitles(data){
+  getTitles(data) {
 
     return Object.keys(data)
+  }
+
+  // test() {
+  //   this.showToastMessage("hello world","success")
+  // }
+
+  showToastMessage(message,severity) {
+
+    this.toast=JSON.parse(JSON.stringify({
+      message:message,
+      severity:severity,
+      active:true
+    }))
+
   }
 
 

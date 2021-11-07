@@ -30,18 +30,11 @@ input {
 }
 
 .status-info-container{
-
-
 display: grid;
 grid-template-columns: repeat(2, 1fr);
 
-
-
-
 }
 .info-form{
-
-
     display: grid;
     justify-content: flex-start;
     justify-items: flex-start;
@@ -56,4 +49,6 @@ grid-template-columns: repeat(2, 1fr);
 padding:1em 0;
 
 }
+
+
 

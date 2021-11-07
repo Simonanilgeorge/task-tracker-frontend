@@ -1,9 +1,10 @@
 <div class="container">
     <app-nav></app-nav>
+
+
+    <app-toast [toast]="toast" (test)="toast.active=$event"></app-toast>
     <div class="grid-container">
         <div class="form card" [formGroup]="form">
-
-
             <input type="text" formControlName="name" placeholder="name">
             <input type="number" formControlName="price" placeholder="price" step="0.01">
             <input type="number" formControlName="quantity" placeholder="quantity">
