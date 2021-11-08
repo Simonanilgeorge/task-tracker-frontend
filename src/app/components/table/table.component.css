@@ -1,3 +1,18 @@
 .grand-total{
     font-weight: bolder;
 }
+
+.arrow{
+    cursor: pointer;
+
+
+    display: inline-block;
+}
+
+
+
+.rotate-arrow{
+    transition: 200ms ease-in-out;
+    transform: rotate(180deg);
+}
+

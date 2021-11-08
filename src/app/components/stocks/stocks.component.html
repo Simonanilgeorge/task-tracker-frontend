@@ -4,16 +4,8 @@
 
     <app-toast [toast]="toast" (test)="toast.active=$event"></app-toast>
 
-    <div class="modal-container" [class.modal-open]="modalOpen">
-        <div class="modal card" [class.modal-content-open]="modalOpen">
-            <p>Are you sure you want to delete?</p>
-            <div class="button-container">
-            <button class="button default" (click)="delete()">yes</button>
-            <button class="button default" (click)="delete()">no</button>
-        </div>
-            
-        </div>
-    </div>
+    <app-modal [modal]="modal" (modalClose)=delete($event)></app-modal>
+
     <div class="grid-container">
         <div class="form card" [formGroup]="form">
             <input type="text" formControlName="name" placeholder="name">

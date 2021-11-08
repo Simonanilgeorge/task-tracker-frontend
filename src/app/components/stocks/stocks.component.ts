@@ -10,7 +10,13 @@ import { Validators, FormBuilder, FormArray, FormGroup } from '@angular/forms';
 })
 export class StocksComponent implements OnInit {
 
-  modalOpen: boolean = false;
+
+  modal={
+    open:false,
+    message:null,
+    data:null
+  }
+
   toast = {
     active: false,
     message: null,
@@ -31,7 +37,8 @@ export class StocksComponent implements OnInit {
       enabled: true,
       keys: ["buy amount", "quantity", "price"]
     },
-    sort: true
+    sort: true,
+    delete:true
   }
 
   data = []
@@ -129,7 +136,10 @@ export class StocksComponent implements OnInit {
   }
 
   test() {
-    this.modalOpen = true
+
+    this.modal.open=true
+    this.modal.message="Are you sure you want to delete"
+    this.modal.data="DOGE"
   }
 
   showToastMessage(message, severity) {
@@ -143,8 +153,10 @@ export class StocksComponent implements OnInit {
   }
 
 
-  delete() {
-    this.modalOpen = false
+  delete(data) {
+    console.log(data)
+    this.modal.open=false;
+
   }
 
 

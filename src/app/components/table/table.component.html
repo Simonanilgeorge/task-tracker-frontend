@@ -1,20 +1,31 @@
 <table>
     <tr>
-        <th *ngFor="let title of titles">{{title}}
+        <th *ngFor="let title of titles; index as i">{{title}}
 
             <span *ngIf="additionalFeatures.sort">
-                <span (click)="sort(title)" style="cursor: pointer">&uarr;&darr;</span>
+                <span (click)="sort(title,i)" class="arrow" [class.rotate-arrow]="i==clickedIndex">&uarr;&darr;</span>
             </span>
         </th>
+
+          <th  *ngIf="additionalFeatures.delete">
+                delete
+            </th>
+  
     </tr>
 
 
     <tr *ngFor="let data of data">
         <td *ngFor="let title of titles" (click)="getStats(data)">{{data[title]}}</td>
+        <td *ngIf="additionalFeatures.delete">
+            <span>delete</span>
+        
+        </td>
     </tr>
     <tr *ngIf="additionalFeatures.grandTotal.enabled" class="grand-total">
-                <td>Grand Total</td>
-                <td *ngFor="let title of titles|slice:1">{{grandTotal[title]}}</td>
-            </tr>
+        <td>Grand Total</td>
+        <td *ngFor="let title of titles|slice:1">{{grandTotal[title]}}</td>
+
+    </tr>
+
 
 </table>

@@ -13,7 +13,10 @@ export class TableComponent implements OnInit {
 
   grandTotal={}
   titles:string[]=[]
-  sortFlag=false
+  sortFlag:boolean=false
+  rotate:boolean=false
+  clickedIndex=null
+  clickCount:number|null=null
   constructor() { }
 
   ngOnInit(): void {
@@ -37,7 +40,13 @@ export class TableComponent implements OnInit {
 
 
 
-  sort(title){
+  sort(title,index){
+
+    this.rotate=!this.rotate
+    this.clickedIndex=index
+    setTimeout(()=>{
+      this.clickedIndex=null
+    },300)
 
 
     this.sortFlag=!this.sortFlag
@@ -61,7 +70,11 @@ export class TableComponent implements OnInit {
 
     })
 
+
   }
+
+
+  
   getStats(data){
     this.selectedData.emit(data)
   }
