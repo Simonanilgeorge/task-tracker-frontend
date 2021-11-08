@@ -23,7 +23,8 @@ export class StocksComponent implements OnInit {
     severity: null
   }
 
-  selectedData = null
+  selectedData =null
+  calculatedStats=[]
 
   stats = {
     percentage: null,
@@ -39,6 +40,15 @@ export class StocksComponent implements OnInit {
     },
     sort: true,
     delete:true
+  }
+
+calculatedStatsFeatures = {
+    grandTotal: {
+      enabled: false,
+      keys: ["buy amount", "quantity", "price"]
+    },
+    sort: false,
+    delete:false
   }
 
   data = []
@@ -106,26 +116,30 @@ export class StocksComponent implements OnInit {
     this.stockService.getAllStocks().subscribe((res) => {
       this.data = res.message
       // this.titles = Object.keys(this.data[0])
-      this.selectedData = this.data[0];
+      this.selectedData=this.data[0];
     })
   }
 
   getStats(data) {
-    console.log(data)
-    this.selectedData = data
+    if(this.calculatedStats.length!=0){
+      this.calculatedStats.pop()
+    }
+    this.showToastMessage(`${data.name} selected for calculation`,"success")
+    this.selectedData=data
+    console.log(this.selectedData)
     this.sellForm.reset()
 
   }
 
 
   calculate() {
-
-
     this.stats.percentage = ((this.currentAmount.value - this.selectedData.price) / this.selectedData.price) * 100
     this.stats.totalSellAmount = this.selectedData.quantity * this.currentAmount.value
     this.stats.difference = this.stats.totalSellAmount - this.selectedData["buy amount"]
 
-    console.log(this.stats)
+
+    this.calculatedStats.push({...this.selectedData,...this.stats})
+
 
 
   }

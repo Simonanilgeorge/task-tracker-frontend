@@ -27,6 +27,7 @@ export class TableComponent implements OnInit {
 
   generateTitles(){
     this.titles = Object.keys(this.data[0])
+    console.log(this.titles)
     if(this.additionalFeatures.grandTotal.enabled){
       this.additionalFeatures.grandTotal.keys.forEach((key)=>{
 

@@ -92,9 +92,12 @@ input {
   /* box-shadow: 1px 3px 4px 0px grey; */
 }
 table {
-  width: 100%;
+  width:100%;
   border-collapse: collapse;
   font-size: 0.8rem;
+
+  /* move table to center */
+
 
 }
 
@@ -105,6 +108,7 @@ th {
   padding: 2em 1em;
   text-align: start;
   position: sticky;
+  white-space: nowrap;
   top:0;
 }
 
@@ -114,6 +118,7 @@ td {
   border-bottom: 1px solid grey;
   /* background-image: linear-gradient(to bottom, white, rgb(190, 190, 190)); */
 }
+
 
 h1 {
   font-weight: lighter;

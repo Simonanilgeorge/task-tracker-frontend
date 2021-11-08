@@ -25,13 +25,19 @@ input {
 
 .stats-container {
   grid-area: stats-container;
+  display: flex;
+  flex-direction: column;
 
   padding: 1em;
 }
 
 .status-info-container {
+  flex:1;
+
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(1,1fr);
+  gap:1em;
 }
 .info-form {
   display: grid;
@@ -44,5 +50,7 @@ input {
 
 .box {
   /* border:1px solid black; */
-  padding: 1em 0;
+  padding: 1em;
+  overflow: auto;
+  max-height:14em;
 }

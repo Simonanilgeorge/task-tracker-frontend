@@ -10,7 +10,7 @@
   pointer-events: none;
   opacity: 0;
   place-items: center;
-  backdrop-filter: blur(9px);
+  backdrop-filter: blur(7px);
 
 
   perspective: 40em;
@@ -34,8 +34,7 @@
 
   transform: rotateY(90deg) rotateX(60deg) translateY(30%);
   transition: 1s cubic-bezier(0.25, 0.74, 0.22, 0.99);
-  background: black;
-  color:white;
+  background: white;
 }
 
 .modal-content-open {
