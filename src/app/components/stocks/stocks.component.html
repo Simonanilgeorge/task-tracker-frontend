@@ -3,14 +3,25 @@
 
 
     <app-toast [toast]="toast" (test)="toast.active=$event"></app-toast>
+
+    <div class="modal-container" [class.modal-open]="modalOpen">
+        <div class="modal card" [class.modal-content-open]="modalOpen">
+            <p>Are you sure you want to delete?</p>
+            <div class="button-container">
+            <button class="button default" (click)="delete()">yes</button>
+            <button class="button default" (click)="delete()">no</button>
+        </div>
+            
+        </div>
+    </div>
     <div class="grid-container">
         <div class="form card" [formGroup]="form">
             <input type="text" formControlName="name" placeholder="name">
             <input type="number" formControlName="price" placeholder="price" step="0.01">
-            <input type="number" formControlName="quantity" placeholder="quantity">
+            <input type="number" formControlName="buyAmount" placeholder="buy amount">
             <button class="button submit" (click)="addStock()" [class.disabled]="!form.valid"
                 [disabled]="!form.valid">add stock</button>
-            <!-- <button class="button submit" (click)="test()">test</button> -->
+            <button class="button submit" (click)="test()">test</button>
         </div>
 
 

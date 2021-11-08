@@ -10,11 +10,11 @@ import { Validators, FormBuilder, FormArray, FormGroup } from '@angular/forms';
 })
 export class StocksComponent implements OnInit {
 
-
-  toast={
-    active:false,
-    message:null,
-    severity:null
+  modalOpen: boolean = false;
+  toast = {
+    active: false,
+    message: null,
+    severity: null
   }
 
   selectedData = null
@@ -39,8 +39,8 @@ export class StocksComponent implements OnInit {
   form = this.fb.group({
     name: [{ value: "", disabled: false }, Validators.required],
     price: [{ value: null, disabled: false }, [Validators.required, Validators.min(0)]],
-    quantity: [{ value: null, disabled: false }, [Validators.min(1), Validators.required]],
-    buyAmount: [{ value: null, disabled: false }],
+    buyAmount: [{ value: null, disabled: false }, [Validators.min(1), Validators.required]],
+    quantity: [{ value: null, disabled: false }],
   })
 
   sellForm = this.fb.group({
@@ -82,11 +82,12 @@ export class StocksComponent implements OnInit {
     //   this.quantity.setValue(0)
     // }
     this.name.setValue(this.name.value.toUpperCase())
-    this.buyAmount.setValue(this.price.value * this.quantity.value)
+
+    this.quantity.setValue(this.buyAmount.value / this.price.value)
 
     this.stockService.addStock(this.form.getRawValue()).subscribe((res) => {
 
-      this.showToastMessage("stock added","success")
+      this.showToastMessage(res.message, "success")
       this.form.reset()
       this.getAllStocks()
 
@@ -127,18 +128,23 @@ export class StocksComponent implements OnInit {
     return Object.keys(data)
   }
 
-  // test() {
-  //   this.showToastMessage("hello world","success")
-  // }
+  test() {
+    this.modalOpen = true
+  }
 
-  showToastMessage(message,severity) {
+  showToastMessage(message, severity) {
 
-    this.toast=JSON.parse(JSON.stringify({
-      message:message,
-      severity:severity,
-      active:true
+    this.toast = JSON.parse(JSON.stringify({
+      message: message,
+      severity: severity,
+      active: true
     }))
 
+  }
+
+
+  delete() {
+    this.modalOpen = false
   }
 
 
