@@ -22,24 +22,17 @@
             <h1>Stats</h1>
 
             <div *ngIf="selectedData!=null" class="status-info-container">
-                <form class="box info-form card" [formGroup]="sellForm">
+                <div class="box info-form card" [formGroup]="sellForm">
                     <input type="number" formControlName="currentAmount" placeholder="current value">
                     <button class="button default" (click)="calculate()" [class.disabled]="!sellForm.valid"
                         [disabled]="!sellForm.valid">calculate</button>
-                </form>
+                </div>
 
                 <div class="box info-table card" style="padding:0em;">
                     <!-- <h1>{{selectedData.name}}</h1> -->
                     <span *ngIf="calculatedStats.length!=0">
                         <app-table [data]="calculatedStats" [additionalFeatures]="calculatedStatsFeatures"></app-table>
                     </span>
-
-                    <!-- <h3 *ngFor="let title of getTitles(selectedData)">
-                    {{title}} : {{selectedData[title]}}
-                </h3>
-                <h3 *ngFor="let title of getTitles(stats)">
-                    {{title}} : {{stats[title]}}
-                </h3> -->
                 </div>
             </div>
         </div>

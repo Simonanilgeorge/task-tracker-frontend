@@ -33,6 +33,8 @@ export class StocksComponent implements OnInit {
   }
   titles: string[] = []
 
+
+  // features for tab
   additionalFeatures = {
     grandTotal: {
       enabled: true,

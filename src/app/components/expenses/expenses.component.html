@@ -1,1 +1,26 @@
-<p>expenses works!</p>
+<div class="container">
+    <app-nav></app-nav>
+    <app-toast [toast]="toast" (test)="toast.active=$event"></app-toast>
+
+    <app-modal [modal]="modal" (modalClick)=delete($event)></app-modal>
+
+    <div class="grid-container">
+ 
+        <div class="form card" [formGroup]="form">
+            <input type="text" formControlName="name" placeholder="name">
+            <input type="number" formControlName="amount" placeholder="amount" step="0.1">
+
+            <button class="button submit" (click)="addExpense()" [class.disabled]="!form.valid"
+                [disabled]="!form.valid">add expense</button>
+
+        </div>
+
+        <div class="table-container card">
+            <span *ngIf="data.length!=0">
+                <app-table [data]="data" [additionalFeatures]="additionalFeatures" (selectedData)="getStats($event)" (deleteData)="openModal($event)">
+                </app-table>
+            </span>
+
+        </div>
+    </div>
+</div>
