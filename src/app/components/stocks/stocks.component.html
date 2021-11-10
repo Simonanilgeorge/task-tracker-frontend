@@ -4,7 +4,7 @@
 
     <app-toast [toast]="toast" (test)="toast.active=$event"></app-toast>
 
-    <app-modal [modal]="modal" (modalClose)=delete($event)></app-modal>
+    <app-modal [modal]="modal" (modalClick)=delete($event)></app-modal>
 
     <div class="grid-container">
         <div class="form card" [formGroup]="form">
@@ -13,7 +13,7 @@
             <input type="number" formControlName="buyAmount" placeholder="buy amount">
             <button class="button submit" (click)="addStock()" [class.disabled]="!form.valid"
                 [disabled]="!form.valid">add stock</button>
-            <button class="button submit" (click)="test()">test</button>
+            <!-- <button class="button submit" (click)="test()">test</button> -->
         </div>
 
 
@@ -28,8 +28,8 @@
                         [disabled]="!sellForm.valid">calculate</button>
                 </form>
 
-                <div class="box card">
-                    <h1>{{selectedData.name}}</h1>
+                <div class="box info-table card" style="padding:0em;">
+                    <!-- <h1>{{selectedData.name}}</h1> -->
                     <span *ngIf="calculatedStats.length!=0">
                         <app-table [data]="calculatedStats" [additionalFeatures]="calculatedStatsFeatures"></app-table>
                     </span>
@@ -46,7 +46,7 @@
 
         <div class="table-container card">
             <span *ngIf="data.length!=0">
-                <app-table [data]="data" [additionalFeatures]="additionalFeatures" (selectedData)="getStats($event)">
+                <app-table [data]="data" [additionalFeatures]="additionalFeatures" (selectedData)="getStats($event)" (deleteData)="openModal($event)">
                 </app-table>
             </span>
 

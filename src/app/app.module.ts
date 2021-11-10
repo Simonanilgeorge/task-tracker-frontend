@@ -10,6 +10,8 @@ import { StocksComponent } from './components/stocks/stocks.component';
 import { TableComponent } from './components/table/table.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ExpensesComponent } from './components/expenses/expenses.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +20,16 @@ import { ModalComponent } from './components/modal/modal.component';
     StocksComponent,
     TableComponent,
     ToastComponent,
-    ModalComponent
+    ModalComponent,
+    ExpensesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FontAwesomeModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

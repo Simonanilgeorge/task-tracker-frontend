@@ -6,7 +6,7 @@ input {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(1, 0.4fr 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  /* grid-template-rows: repeat(2, 1fr); */
   padding: 0.5em;
   gap: 0.5em;
   grid-template-areas:
@@ -36,10 +36,16 @@ input {
 
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(1,1fr);
+  /* grid-template-rows: repeat(1,1fr); */
+  grid-template-areas: 
+  "info-form info-table";
   gap:1em;
 }
+
+
+
 .info-form {
+  grid-area:info-form;
   display: grid;
   justify-content: flex-start;
   justify-items: flex-start;
@@ -48,9 +54,29 @@ input {
   gap: 1em;
 }
 
+.info-table {
+  grid-area:info-table;
+}
+
 .box {
   /* border:1px solid black; */
   padding: 1em;
   overflow: auto;
   max-height:14em;
+}
+
+
+@media screen and (max-width: 50em) {
+.grid-container{
+  grid-template-areas:
+  "form form"
+  "stats-container stats-container"
+  "table-container table-container";
+}
+
+.status-info-container {
+  grid-template-areas: 
+  "info-form info-form"
+  "info-table info-table";
+}
 }

@@ -20,4 +20,8 @@ export class StocksService {
     return this.http.post<any>(this.url,data)
   }
 
+  deleteStock(id:any):Observable<any>{
+    return this.http.delete<any>(`${this.url}/${id}`)
+  }
+
 }

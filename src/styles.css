@@ -93,6 +93,7 @@ input {
 }
 table {
   width:100%;
+  min-height: 100%;
   border-collapse: collapse;
   font-size: 0.8rem;
 
@@ -115,7 +116,7 @@ th {
 td {
   padding: 0.5em 1em;
   cursor: pointer;
-  border-bottom: 1px solid grey;
+  /* border-bottom: 1px solid grey; */
   /* background-image: linear-gradient(to bottom, white, rgb(190, 190, 190)); */
 }
 

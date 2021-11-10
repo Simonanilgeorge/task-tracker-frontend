@@ -2,7 +2,7 @@
     <div class="modal card" [class.modal-content-open]="modal.open">
         <p>{{modal.message}} {{modal.data}}</p>
         <div class="button-container">
-        <button class="button default" (click)="modalClose.emit(modal.data)">yes</button>
+        <button class="button default" (click)="modalClick.emit(modal.data)">yes</button>
         <button class="button default" (click)="closeModal()">no</button>
     </div>
         

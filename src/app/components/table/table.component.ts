@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -10,6 +11,7 @@ export class TableComponent implements OnInit {
   @Input() data
   @Input() additionalFeatures
   @Output() selectedData=new EventEmitter()
+  @Output() deleteData=new EventEmitter()
 
   grandTotal={}
   titles:string[]=[]
@@ -17,6 +19,7 @@ export class TableComponent implements OnInit {
   rotate:boolean=false
   clickedIndex=null
   clickCount:number|null=null
+  faTrash = faTrash;
   constructor() { }
 
   ngOnInit(): void {
@@ -74,10 +77,12 @@ export class TableComponent implements OnInit {
 
   }
 
-
-  
   getStats(data){
     this.selectedData.emit(data)
+  }
+
+  delete(data){
+      this.deleteData.emit(data)
   }
 
 }

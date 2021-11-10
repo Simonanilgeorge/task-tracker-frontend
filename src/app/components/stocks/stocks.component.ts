@@ -11,10 +11,10 @@ import { Validators, FormBuilder, FormArray, FormGroup } from '@angular/forms';
 export class StocksComponent implements OnInit {
 
 
-  modal={
-    open:false,
-    message:null,
-    data:null
+  modal = {
+    open: false,
+    message: null,
+    data: null
   }
 
   toast = {
@@ -23,8 +23,8 @@ export class StocksComponent implements OnInit {
     severity: null
   }
 
-  selectedData =null
-  calculatedStats=[]
+  selectedData = null
+  calculatedStats = []
 
   stats = {
     percentage: null,
@@ -39,16 +39,16 @@ export class StocksComponent implements OnInit {
       keys: ["buy amount", "quantity", "price"]
     },
     sort: true,
-    delete:true
+    delete: true
   }
 
-calculatedStatsFeatures = {
+  calculatedStatsFeatures = {
     grandTotal: {
       enabled: false,
       keys: ["buy amount", "quantity", "price"]
     },
     sort: false,
-    delete:false
+    delete: false
   }
 
   data = []
@@ -100,7 +100,7 @@ calculatedStatsFeatures = {
     // }
     this.name.setValue(this.name.value.toUpperCase())
 
-    this.quantity.setValue(this.buyAmount.value / this.price.value)
+    this.quantity.setValue((this.buyAmount.value / this.price.value).toFixed(2))
 
     this.stockService.addStock(this.form.getRawValue()).subscribe((res) => {
 
@@ -115,17 +115,24 @@ calculatedStatsFeatures = {
   getAllStocks() {
     this.stockService.getAllStocks().subscribe((res) => {
       this.data = res.message
+
       // this.titles = Object.keys(this.data[0])
-      this.selectedData=this.data[0];
+
+      // this.data=this.data.map((data) => {
+      //   return ({...data,edit:"edit"})
+
+      // })
+
+      this.selectedData = this.data[0];
     })
   }
 
   getStats(data) {
-    if(this.calculatedStats.length!=0){
+    if (this.calculatedStats.length != 0) {
       this.calculatedStats.pop()
     }
-    this.showToastMessage(`${data.name} selected for calculation`,"success")
-    this.selectedData=data
+    this.showToastMessage(`${data.name} selected for calculation`, "success")
+    this.selectedData = data
     console.log(this.selectedData)
     this.sellForm.reset()
 
@@ -133,12 +140,13 @@ calculatedStatsFeatures = {
 
 
   calculate() {
-    this.stats.percentage = ((this.currentAmount.value - this.selectedData.price) / this.selectedData.price) * 100
-    this.stats.totalSellAmount = this.selectedData.quantity * this.currentAmount.value
-    this.stats.difference = this.stats.totalSellAmount - this.selectedData["buy amount"]
+    this.stats.percentage = (((this.currentAmount.value - this.selectedData.price) / this.selectedData.price) * 100).toFixed(2)
+    this.stats.totalSellAmount = (this.selectedData.quantity * this.currentAmount.value).toFixed(2)
+    this.stats.difference = this.stats.totalSellAmount - this.selectedData.buyAmount
+    console.log(this.stats.difference)
+    console.log(this.stats.totalSellAmount)
 
-
-    this.calculatedStats.push({...this.selectedData,...this.stats})
+    this.calculatedStats.push({ ...this.selectedData, ...this.stats })
 
 
 
@@ -149,11 +157,11 @@ calculatedStatsFeatures = {
     return Object.keys(data)
   }
 
-  test() {
+  openModal(data) {
 
-    this.modal.open=true
-    this.modal.message="Are you sure you want to delete"
-    this.modal.data="DOGE"
+    this.modal.open = true
+    this.modal.message = "Are you sure you want to delete"
+    this.modal.data = data.id
   }
 
   showToastMessage(message, severity) {
@@ -169,7 +177,11 @@ calculatedStatsFeatures = {
 
   delete(data) {
     console.log(data)
-    this.modal.open=false;
+    this.modal.open = false;
+    this.stockService.deleteStock(data).subscribe((res)=>{
+      this.showToastMessage(res.message,"success")
+      this.getAllStocks()
+    })
 
   }
 

@@ -17,8 +17,8 @@
     <tr *ngFor="let data of data">
         <td *ngFor="let title of titles" (click)="getStats(data)">{{data[title]}}</td>
         <td *ngIf="additionalFeatures.delete">
-            <span>delete</span>
-        
+            <span style="color: #607d8b;" (click)="delete(data)"><fa-icon [icon]="faTrash"></fa-icon></span>
+
         </td>
     </tr>
     <tr *ngIf="additionalFeatures.grandTotal.enabled" class="grand-total">
