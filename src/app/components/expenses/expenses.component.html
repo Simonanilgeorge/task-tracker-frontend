@@ -11,13 +11,25 @@
             <input type="number" formControlName="amount" placeholder="amount" step="0.1">
 
             <button class="button submit" (click)="addExpense()" [class.disabled]="!form.valid"
-                [disabled]="!form.valid">add expense</button>
+                [disabled]="!form.valid" *ngIf="!editFlag">add expense</button>
+            
+
+            <div *ngIf="editFlag" style="display: flex;gap:1em;"> 
+                <button class="button submit" (click)="edit()" [class.disabled]="!form.valid" [disabled]="!form.valid">
+                    update expense
+                </button>
+
+                <button class="button default" (click)="cancelEdit()">
+                    cancel
+                </button>
+            </div>
+
 
         </div>
 
         <div class="table-container card">
             <span *ngIf="data.length!=0">
-                <app-table [data]="data" [additionalFeatures]="additionalFeatures" (selectedData)="getStats($event)" (deleteData)="openModal($event)">
+                <app-table [data]="data" [additionalFeatures]="additionalFeatures" (deleteData)="openModal($event)" (editData)="populateFields($event)">
                 </app-table>
             </span>
 

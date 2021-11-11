@@ -19,4 +19,11 @@ export class ExpensesService {
     return this.http.post<any>(this.url,data)
   }
 
+  deleteExpense(id:any):Observable<any>{
+    return this.http.delete<any>(`${this.url}/${id}`)
+  }
+
+  editExpenses(data):Observable<any>{
+    return this.http.put<any>(`${this.url}/${data.id}`,data)
+  }
 }

@@ -10,6 +10,10 @@
           <th  *ngIf="additionalFeatures.delete">
                 delete
             </th>
+
+            <th  *ngIf="additionalFeatures.edit">
+                edit
+            </th>
   
     </tr>
 
@@ -18,6 +22,10 @@
         <td *ngFor="let title of titles" (click)="getStats(data)">{{data[title]}}</td>
         <td *ngIf="additionalFeatures.delete">
             <span style="color: #607d8b;" (click)="delete(data)"><fa-icon [icon]="faTrash"></fa-icon></span>
+
+        </td>
+        <td *ngIf="additionalFeatures.edit">
+            <span style="color: #607d8b;" (click)="edit(data)"><fa-icon [icon]="faEdit"></fa-icon></span>
 
         </td>
     </tr>

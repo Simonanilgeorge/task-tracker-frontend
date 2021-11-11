@@ -41,7 +41,8 @@ export class StocksComponent implements OnInit {
       keys: ["buy amount", "quantity", "price"]
     },
     sort: true,
-    delete: true
+    delete: true,
+    edit:false
   }
 
   calculatedStatsFeatures = {
@@ -50,7 +51,8 @@ export class StocksComponent implements OnInit {
       keys: ["buy amount", "quantity", "price"]
     },
     sort: false,
-    delete: false
+    delete: false,
+    edit:false
   }
 
   data = []

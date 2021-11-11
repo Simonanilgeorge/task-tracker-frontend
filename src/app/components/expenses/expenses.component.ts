@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormArray, FormGroup } from '@angular/forms';
+
 import { ExpensesService } from '../../services/expenses.service'
 
 @Component({
@@ -11,7 +12,7 @@ export class ExpensesComponent implements OnInit {
 
 
 
-  data=[]
+  data = []
 
   modal = {
     open: false,
@@ -26,17 +27,19 @@ export class ExpensesComponent implements OnInit {
   }
   additionalFeatures = {
     grandTotal: {
-      enabled: false,
-      keys: []
+      enabled: true,
+      keys: ["amount"]
     },
     sort: true,
-    delete: false
+    delete: true,
+    edit: true
   }
 
 
-
+  editFlag:boolean=false
 
   form = this.fb.group({
+    id:[{value:"",disabled:true}],
     name: [{ value: "", disabled: false }, Validators.required],
     amount: [{ value: null, disabled: false }, Validators.required]
   })
@@ -50,31 +53,53 @@ export class ExpensesComponent implements OnInit {
 
   addExpense() {
     console.log(this.form.getRawValue())
-    this.expensesService.addExpense(this.form.getRawValue()).subscribe((res)=>{
+    this.expensesService.addExpense(this.form.getRawValue()).subscribe((res) => {
       console.log(res)
       this.form.reset()
-      this.showToastMessage(res.message,"success")
+      this.showToastMessage(res.message, "success")
       this.getAllExpenses()
     })
   }
 
+  edit(){
+    console.log(this.form.getRawValue())
+
+    this.expensesService.editExpenses(this.form.getRawValue()).subscribe((res)=>{
+      this.showToastMessage(res.message,"success")
+      this.getAllExpenses()
+      this.editFlag=false
+      this.form.reset()
+    })
+  }
+
+  cancelEdit(){
+    this.editFlag=false
+    this.form.reset()
+  }
   getAllExpenses() {
     this.expensesService.getAllExpenses().subscribe((res) => {
-      this.data=res.message
+      this.data = res.message
       console.log(this.data)
     })
   }
 
 
-  getStats(data){
 
+  openModal(data) {
+    this.modal.open = true
+    this.modal.message = `are you sure you want to delete ${data.name}`
+    this.modal.data=data.id
   }
-  openModal(data){
 
-  }
+  delete(data) {
 
-  delete(data){
 
+    this.modal.open=false
+    this.expensesService.deleteExpense(data).subscribe((res) => {
+      this.showToastMessage(res.message, "success")
+      this.getAllExpenses()
+
+    })
   }
 
   showToastMessage(message, severity) {
@@ -86,5 +111,11 @@ export class ExpensesComponent implements OnInit {
     }))
 
   }
+
+  populateFields(data){
+    this.editFlag=true
+    this.form.patchValue(data)
+  }
+
 
 }
