@@ -8,16 +8,20 @@
   padding: 0;
 }
 
-:root{
---navbar-bg:rgb(255, 187, 0);
---table-header-bg:rgb(255, 187, 0);
+:root {
+  --light: 50%;
+  --dark: 40%;
+  --navbar-bg: hsl(44deg 100% var(--light));
+  --table-header-bg: hsl(44deg 100% var(--light));
+  --button-submit: hsl(120deg 100% 25%);
+  --button-default: hsl(207deg 44% 49%);
 }
+
 *:focus {
   outline: none;
 }
 .container {
-
-min-height: 100vh;
+  min-height: 100vh;
 
   display: flex;
   flex-direction: column;
@@ -36,6 +40,8 @@ min-height: 100vh;
   justify-content: start;
   gap: 1.5em;
 }
+
+/* button styles start */
 .button {
   color: #ffffff;
   cursor: pointer;
@@ -49,32 +55,42 @@ min-height: 100vh;
   text-transform: capitalize;
 }
 
-.submit {
-  background: green;
+
+.submit,.default{
+
+  position: relative;
+  isolation: isolate;
 }
 
-.default{
-  background:steelblue;
+.submit:after,.default:after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transition: 300ms ease-in-out;
 }
 
-.submit:hover {
-  background: rgb(7, 87, 7);
+.submit:after {
+  background: var(--button-submit);
 }
+.default:after{
+  background: var(--button-default);
+}
+.button:hover:after {
 
-.default:hover{
-  background:rgb(39, 87, 126);
+  filter: brightness(0.6);
 }
 
 .disabled {
-opacity: 0.6;
-
+  opacity: 0.6;
   pointer-events: none;
 }
 
+/* button styles end */
+
+
 input,
 label {
-
-
   display: block;
 }
 
@@ -83,7 +99,6 @@ input {
   padding: 0.6em;
   border: none;
   border-bottom: 1px solid grey;
-
 }
 
 .table-container {
@@ -91,30 +106,26 @@ input {
   display: inline-block;
   overflow: auto;
 
-
-
   /* box-shadow: 1px 3px 4px 0px grey; */
 }
 table {
-  width:100%;
+  width: 100%;
   min-height: 100%;
   border-collapse: collapse;
   font-size: 0.8rem;
 
   /* move table to center */
-
-
 }
 
 th {
-  background:var(--table-header-bg);
+  background: var(--table-header-bg);
   text-transform: uppercase;
   color: #661c17;
   padding: 2em 1em;
   text-align: start;
   position: sticky;
   white-space: nowrap;
-  top:0;
+  top: 0;
 }
 
 td {
@@ -124,13 +135,12 @@ td {
   /* background-image: linear-gradient(to bottom, white, rgb(190, 190, 190)); */
 }
 
-
 h1 {
   font-weight: lighter;
   text-transform: uppercase;
 }
 
-h3{
+h3 {
   font-weight: 300;
   text-transform: uppercase;
 }
