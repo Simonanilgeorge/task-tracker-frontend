@@ -123,16 +123,8 @@ export class ExpensesComponent implements OnInit {
     this.form.patchValue(data)
   }
 
-
-  test(){
+  test() {
     console.log(this.form.getRawValue())
-  }
-
-    preventEventPropagation(event){
-    event.stopPropagation()
-    if(!event.target.classList.contains("checkbox-dropdown")){
-      this.display=false
-    }
   }
 
 }

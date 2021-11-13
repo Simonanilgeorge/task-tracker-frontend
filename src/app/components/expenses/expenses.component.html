@@ -1,4 +1,4 @@
-<div class="container" (click)="preventEventPropagation($event)">
+<div class="container" (click)="display=false;">
     <app-nav></app-nav>
     <app-toast [toast]="toast" (test)="toast.active=$event"></app-toast>
 
@@ -9,18 +9,20 @@
         <div class="form card" [formGroup]="form">
             <input type="text" formControlName="name" placeholder="name">
             <input type="number" formControlName="amount" placeholder="amount" step="0.1">
+            <app-dropdown [fruits]="fruits" [fruitsArray]="fruitsArray" [(display)]="display"></app-dropdown>
 
             <button class="button submit" (click)="addExpense()" [class.disabled]="!form.valid" [disabled]="!form.valid"
                 *ngIf="!editFlag">add expense</button>
 
             <button class="button default" (click)="test()">test</button>
 
-            <app-dropdown [fruits]="fruits" [fruitsArray]="fruitsArray" [preventEventPropagation]="preventEventPropagation"></app-dropdown>
 
+            
             <div *ngIf="editFlag" style="display: flex;gap:1em;">
                 <button class="button submit" (click)="edit()" [class.disabled]="!form.valid" [disabled]="!form.valid">
                     update expense
                 </button>
+
                 <button class="button default" (click)="cancelEdit()">
                     cancel
                 </button>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit,Output,EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormArray, FormGroup } from '@angular/forms';
 
 @Component({
@@ -10,15 +10,10 @@ export class DropdownComponent implements OnInit {
 
   @Input() fruits
   @Input() fruitsArray
-  @Input() preventEventPropagation = (event) => {
-    event.stopPropagation()
-    if (!event.target.classList.contains("checkbox-dropdown")) {
-      console.log("clicked outside")
-      this.display = false
-    }
-  };
+  @Input() display
+  @Output() displayChange=new EventEmitter()
 
-  display: boolean = false
+
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -26,6 +21,7 @@ export class DropdownComponent implements OnInit {
 
   // dropdown checkbox
   test(fruit, event) {
+
     event.stopPropagation()
 
     if (this.fruits.getRawValue().includes(fruit)) {
@@ -37,6 +33,7 @@ export class DropdownComponent implements OnInit {
   }
 
   checkAll(event) {
+
     event.stopPropagation()
     this.fruits.clear()
     if (event.target.checked) {
@@ -44,22 +41,14 @@ export class DropdownComponent implements OnInit {
         this.fruits.push(this.fb.control(fruit))
       })
     }
-    console.log(this.fruits.getRawValue())
   }
 
   displayDropDown(event) {
+
+    event.stopPropagation()
     this.display = !this.display
-    console.log(this.display)
+    this.displayChange.emit(this.display)
+
   }
-
-
-
-  // preventEventPropagation(event){
-  //   event.stopPropagation()
-  //   if(!event.target.classList.contains("checkbox-dropdown")){
-  //     console.log("clicked outside")
-  //     this.display=false
-  //   }
-  // }
 
 }
