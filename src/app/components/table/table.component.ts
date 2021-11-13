@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output,EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output,EventEmitter,SimpleChanges, OnChanges  } from '@angular/core';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,7 +8,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnChanges {
   @Input() data
   @Input() additionalFeatures
   @Output() selectedData=new EventEmitter()
@@ -25,7 +25,7 @@ export class TableComponent implements OnInit {
   faEdit=faEdit
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     this.generateTitles()
 
   }
@@ -33,7 +33,7 @@ export class TableComponent implements OnInit {
 
   generateTitles(){
     this.titles = Object.keys(this.data[0])
-    console.log(this.titles)
+
     if(this.additionalFeatures.grandTotal.enabled){
       this.additionalFeatures.grandTotal.keys.forEach((key)=>{
 

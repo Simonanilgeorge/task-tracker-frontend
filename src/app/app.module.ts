@@ -12,6 +12,7 @@ import { ToastComponent } from './components/toast/toast.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ExpensesComponent } from './components/expenses/expenses.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ExpensesComponent } from './components/expenses/expenses.component';
     TableComponent,
     ToastComponent,
     ModalComponent,
-    ExpensesComponent
+    ExpensesComponent,
+    DropdownComponent
   ],
   imports: [
     BrowserModule,

@@ -10,8 +10,8 @@ import { ExpensesService } from '../../services/expenses.service'
 })
 export class ExpensesComponent implements OnInit {
 
-
-
+  display: boolean = false
+  fruitsArray: string[] = []
   data = []
 
   modal = {
@@ -36,12 +36,13 @@ export class ExpensesComponent implements OnInit {
   }
 
 
-  editFlag:boolean=false
+  editFlag: boolean = false
 
   form = this.fb.group({
-    id:[{value:"",disabled:true}],
+    id: [{ value: "", disabled: true }],
     name: [{ value: "", disabled: false }, Validators.required],
-    amount: [{ value: null, disabled: false }, Validators.required]
+    amount: [{ value: null, disabled: false }, Validators.required],
+    fruits: this.fb.array([])
   })
 
   constructor(private fb: FormBuilder, private expensesService: ExpensesService) { }
@@ -50,6 +51,9 @@ export class ExpensesComponent implements OnInit {
     this.getAllExpenses()
   }
 
+  get fruits() {
+    return this.form.get("fruits") as FormArray
+  }
 
   addExpense() {
     console.log(this.form.getRawValue())
@@ -61,25 +65,27 @@ export class ExpensesComponent implements OnInit {
     })
   }
 
-  edit(){
+  edit() {
     console.log(this.form.getRawValue())
 
-    this.expensesService.editExpenses(this.form.getRawValue()).subscribe((res)=>{
-      this.showToastMessage(res.message,"success")
+    this.expensesService.editExpenses(this.form.getRawValue()).subscribe((res) => {
+      this.showToastMessage(res.message, "success")
       this.getAllExpenses()
-      this.editFlag=false
+      this.editFlag = false
       this.form.reset()
     })
   }
 
-  cancelEdit(){
-    this.editFlag=false
+  cancelEdit() {
+    this.editFlag = false
     this.form.reset()
   }
   getAllExpenses() {
     this.expensesService.getAllExpenses().subscribe((res) => {
       this.data = res.message
-      console.log(this.data)
+
+      this.fruitsArray = Object.keys(this.data[0])
+
     })
   }
 
@@ -88,13 +94,13 @@ export class ExpensesComponent implements OnInit {
   openModal(data) {
     this.modal.open = true
     this.modal.message = `are you sure you want to delete ${data.name}`
-    this.modal.data=data.id
+    this.modal.data = data.id
   }
 
   delete(data) {
 
 
-    this.modal.open=false
+    this.modal.open = false
     this.expensesService.deleteExpense(data).subscribe((res) => {
       this.showToastMessage(res.message, "success")
       this.getAllExpenses()
@@ -112,10 +118,21 @@ export class ExpensesComponent implements OnInit {
 
   }
 
-  populateFields(data){
-    this.editFlag=true
+  populateFields(data) {
+    this.editFlag = true
     this.form.patchValue(data)
   }
 
+
+  test(){
+    console.log(this.form.getRawValue())
+  }
+
+    preventEventPropagation(event){
+    event.stopPropagation()
+    if(!event.target.classList.contains("checkbox-dropdown")){
+      this.display=false
+    }
+  }
 
 }

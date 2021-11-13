@@ -11,10 +11,11 @@
 :root {
   --light: 50%;
   --dark: 40%;
-  --navbar-bg: hsl(44deg 100% var(--light));
-  --table-header-bg: hsl(44deg 100% var(--light));
+  --navbar-bg: #ffbb00;
+  --table-header-bg: #ffbb00;
   --button-submit: hsl(120deg 100% 25%);
   --button-default: hsl(207deg 44% 49%);
+  --table-header-color:#661c17;
 }
 
 *:focus {
@@ -45,7 +46,7 @@
 .button {
   color: #ffffff;
   cursor: pointer;
-  border: none;
+border:none;
   padding: 1em 1em;
   font-size: 0.7rem;
   font-weight: 200;
@@ -55,6 +56,18 @@
   text-transform: capitalize;
 }
 
+
+.submit{
+  background: var(--button-submit);
+}
+
+.default{
+  background: var(--button-default);
+}
+.button:hover{
+  filter: brightness(0.6);
+}
+/* 
 
 .submit,.default{
 
@@ -78,8 +91,8 @@
 }
 .button:hover:after {
 
-  filter: brightness(0.6);
-}
+filter:brightness(0.8)
+} */
 
 .disabled {
   opacity: 0.6;
@@ -120,7 +133,7 @@ table {
 th {
   background: var(--table-header-bg);
   text-transform: uppercase;
-  color: #661c17;
+  color: var(--table-header-color);
   padding: 2em 1em;
   text-align: start;
   position: sticky;
