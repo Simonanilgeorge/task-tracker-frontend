@@ -9,7 +9,7 @@
         <div class="form card" [formGroup]="form">
             <input type="text" formControlName="name" placeholder="name">
             <input type="number" formControlName="amount" placeholder="amount" step="0.1">
-            <app-dropdown [fruits]="fruits" [fruitsArray]="fruitsArray" [(display)]="display"></app-dropdown>
+            <app-dropdown [array]="fruits" [localArray]="localArray" [(display)]="display"></app-dropdown>
 
             <button class="button submit" (click)="addExpense()" [class.disabled]="!form.valid" [disabled]="!form.valid"
                 *ngIf="!editFlag">add expense</button>

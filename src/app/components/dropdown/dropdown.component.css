@@ -7,6 +7,10 @@
     position: relative;
     cursor: pointer;
   }
+.checkbox-dropdown:focus-within{
+    box-shadow: 0 0 0 0.2rem #c1c2f9;
+}
+
   
   .dropdown {
     overflow: hidden;

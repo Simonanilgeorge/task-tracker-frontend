@@ -19,6 +19,7 @@
 }
 
 *:focus {
+
   outline: none;
 }
 .container {
@@ -146,6 +147,10 @@ td {
   cursor: pointer;
   border-bottom: 1px solid grey;
   /* background-image: linear-gradient(to bottom, white, rgb(190, 190, 190)); */
+}
+
+tr:focus{
+  box-shadow:inset 0 0 0 0.2rem #086918;
 }
 
 h1 {

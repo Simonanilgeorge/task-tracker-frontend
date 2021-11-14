@@ -11,7 +11,7 @@ import { ExpensesService } from '../../services/expenses.service'
 export class ExpensesComponent implements OnInit {
 
   display: boolean = false
-  fruitsArray: string[] = []
+  localArray: string[] = ["test 1","test 2","test 3","test 4"]
   data = []
 
   modal = {
@@ -56,9 +56,9 @@ export class ExpensesComponent implements OnInit {
   }
 
   addExpense() {
-    console.log(this.form.getRawValue())
+    console.log("adding expense",this.form.getRawValue())
     this.expensesService.addExpense(this.form.getRawValue()).subscribe((res) => {
-      console.log(res)
+
       this.form.reset()
       this.showToastMessage(res.message, "success")
       this.getAllExpenses()
@@ -83,8 +83,8 @@ export class ExpensesComponent implements OnInit {
   getAllExpenses() {
     this.expensesService.getAllExpenses().subscribe((res) => {
       this.data = res.message
+      console.log("get all expenses",this.data)
 
-      this.fruitsArray = Object.keys(this.data[0])
 
     })
   }
@@ -120,7 +120,9 @@ export class ExpensesComponent implements OnInit {
 
   populateFields(data) {
     this.editFlag = true
+    console.log("edit data",data)
     this.form.patchValue(data)
+    console.log("after patch value",this.form.getRawValue())
   }
 
   test() {

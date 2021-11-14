@@ -41,11 +41,7 @@ export class TableComponent implements OnChanges {
       })
       
     }
-
-
   }
-
-
 
   sort(title,index){
 
@@ -76,8 +72,6 @@ export class TableComponent implements OnChanges {
       }
 
     })
-
-
   }
 
   getStats(data){

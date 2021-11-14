@@ -1,12 +1,13 @@
-            <div class="checkbox-dropdown" (click)="displayDropDown($event)" >
+            <div class="checkbox-dropdown" (click)="displayDropDown($event)" tabindex="0">
                 checkbox dropdown
-                <div class="dropdown" [class.display]="display">
+                <div class="dropdown" [class.display]="display" >
+
                 <div style="display: flex;gap:0.3em;padding:0.2em;align-items: center;">
-                    <input type="checkbox" value="select all" (click)="checkAll($event)" [checked]="fruits.value.length==fruitsArray.length">
+                    <input type="checkbox" value="select all" (click)="checkAll($event)" [checked]="array.value.length==localArray.length">
                     Select All
                 </div>
-                <div *ngFor="let fruit of fruitsArray;index as i" style="display: flex;gap:0.3em;padding:0.2em;align-items: center;">
-                    <input type="checkbox" value="fruit" (click)="test(fruit,$event)" [checked]="fruits.value.includes(fruit)">
+                <div *ngFor="let fruit of localArray;index as i" style="display: flex;gap:0.3em;padding:0.2em;align-items: center;">
+                    <input type="checkbox" value="fruit" (click)="test(fruit,$event)" [checked]="array.value.includes(fruit)">
                     {{fruit}}
                 </div>
             </div>

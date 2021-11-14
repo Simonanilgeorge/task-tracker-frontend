@@ -8,8 +8,8 @@ import { Validators, FormBuilder, FormArray, FormGroup } from '@angular/forms';
 })
 export class DropdownComponent implements OnInit {
 
-  @Input() fruits
-  @Input() fruitsArray
+  @Input() array
+  @Input() localArray
   @Input() display
   @Output() displayChange=new EventEmitter()
 
@@ -24,21 +24,21 @@ export class DropdownComponent implements OnInit {
 
     event.stopPropagation()
 
-    if (this.fruits.getRawValue().includes(fruit)) {
-      this.fruits.removeAt(this.fruits.getRawValue().findIndex((f) => f == fruit))
+    if (this.array.getRawValue().includes(fruit)) {
+      this.array.removeAt(this.array.getRawValue().findIndex((f) => f == fruit))
     }
     else {
-      this.fruits.push(this.fb.control(fruit))
+      this.array.push(this.fb.control(fruit))
     }
   }
 
   checkAll(event) {
 
     event.stopPropagation()
-    this.fruits.clear()
+    this.array.clear()
     if (event.target.checked) {
-      this.fruitsArray.forEach((fruit) => {
-        this.fruits.push(this.fb.control(fruit))
+      this.localArray.forEach((fruit) => {
+        this.array.push(this.fb.control(fruit))
       })
     }
   }

@@ -18,8 +18,8 @@
     </tr>
 
 
-    <tr *ngFor="let data of data">
-        <td *ngFor="let title of titles" (click)="getStats(data)">{{data[title]}}</td>
+    <tr *ngFor="let data of data" tabindex="0">
+        <td *ngFor="let title of titles" (click)="getStats(data)" >{{data[title]}}</td>
         <td *ngIf="additionalFeatures.delete">
             <span style="color: #607d8b;" (click)="delete(data)"><fa-icon [icon]="faTrash"></fa-icon></span>
 
