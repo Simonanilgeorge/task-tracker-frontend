@@ -34,7 +34,7 @@
         <div class="table-container card">
             <span *ngIf="data.length!=0">
                 <app-table [data]="data" [additionalFeatures]="additionalFeatures" (deleteData)="openModal($event)"
-                    (editData)="populateFields($event)">
+                    (editData)="enableEdit($event)">
                 </app-table>
             </span>
 

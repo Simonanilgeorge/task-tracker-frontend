@@ -59,7 +59,8 @@ export class ExpensesComponent implements OnInit {
     console.log("adding expense",this.form.getRawValue())
     this.expensesService.addExpense(this.form.getRawValue()).subscribe((res) => {
 
-      this.form.reset()
+      // this.form.reset()
+      this.resetForm()
       this.showToastMessage(res.message, "success")
       this.getAllExpenses()
     })
@@ -72,13 +73,16 @@ export class ExpensesComponent implements OnInit {
       this.showToastMessage(res.message, "success")
       this.getAllExpenses()
       this.editFlag = false
-      this.form.reset()
+      // this.form.reset()
+      this.resetForm()
+
     })
   }
 
   cancelEdit() {
     this.editFlag = false
-    this.form.reset()
+    // this.form.reset()
+    this.resetForm()
   }
   getAllExpenses() {
     this.expensesService.getAllExpenses().subscribe((res) => {
@@ -108,8 +112,11 @@ export class ExpensesComponent implements OnInit {
     })
   }
 
+
+  // set attributes for toast message
   showToastMessage(message, severity) {
 
+    // to detect changes use stringify
     this.toast = JSON.parse(JSON.stringify({
       message: message,
       severity: severity,
@@ -119,14 +126,28 @@ export class ExpensesComponent implements OnInit {
   }
 
   populateFields(data) {
-    this.editFlag = true
-    console.log("edit data",data)
+
     this.form.patchValue(data)
-    console.log("after patch value",this.form.getRawValue())
+    data.fruits.forEach((fruit)=>{
+      this.fruits.push(this.fb.control(fruit))
+    })
   }
 
   test() {
     console.log(this.form.getRawValue())
   }
 
+  resetForm(){
+    this.form.reset()
+    this.fruits.clear()
+  }
+
+
+  // enable edit flag to display update and cancel buttons
+  enableEdit(data){
+    this.editFlag = true
+
+    // call populate fields to populate form data and push values to fruits array
+    this.populateFields(data)
+  }
 }
