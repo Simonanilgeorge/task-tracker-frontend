@@ -1,1 +1,30 @@
-<p>login works!</p>
+<div class="container">
+    <app-toast [toast]="toast" (test)="toast.active=$event"></app-toast>
+
+    <div class="grid-container">
+        <span *ngIf="!registerFlag">
+            <div class="form card" [formGroup]="form">
+                <h1>Login</h1>
+                <input type="text" formControlName="username" placeholder="Username">
+                <input type="password" formControlName="password" placeholder="Password">
+
+                <small style="color:rgb(29, 84, 129);cursor: pointer;" (click)="registerFlag=true">Not a user?.Click to register</small>
+                <button class="button submit" (click)="login()">login</button>
+
+            </div>
+        </span>
+        <span *ngIf="registerFlag">
+            <div class="form card" [formGroup]="registerUserForm">
+                <h1>Register User</h1>
+                <input type="text" formControlName="username" placeholder="Username">
+                <input type="password" formControlName="registerPassword" placeholder="Password">
+                <input type="password" formControlName="confirmPassword" placeholder="Confirm Password">
+                <small style="color:red;" *ngIf="confirmPassword.dirty && registerPassword.value!=confirmPassword.value">Passwords do not match</small>
+                <small style="color:rgb(29, 84, 129);cursor: pointer;" (click)="registerFlag=false">Login</small>
+                <button class="button submit" (click)="registerUser()">register user</button>
+            </div>
+        </span>
+    </div>
+
+
+</div>

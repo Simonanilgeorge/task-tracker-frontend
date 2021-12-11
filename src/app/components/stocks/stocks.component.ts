@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StocksService } from '../../services/stocks.service'
 import { Validators, FormBuilder, FormArray, FormGroup } from '@angular/forms';
+import {LoginService} from '../../services/login.service'
 // import { runInThisContext } from 'vm';
 
 @Component({
@@ -68,12 +69,14 @@ export class StocksComponent implements OnInit {
     currentAmount: [{ value: null, disabled: false }, Validators.required]
   })
 
-  constructor(private stockService: StocksService, private fb: FormBuilder) { }
+  constructor(private stockService: StocksService, private fb: FormBuilder,private loginService:LoginService) { }
 
 
 
   ngOnInit(): void {
+    this.loginService.checkSessionStorage()
     this.getAllStocks()
+
   }
 
   get name(): string | any {

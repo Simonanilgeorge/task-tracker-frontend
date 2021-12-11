@@ -1,0 +1,40 @@
+.grid-container {
+  flex: 1;
+background: linear-gradient(145deg, orange 0% 50%,white 50% 100%);
+
+  display: grid;
+  /* grid-template-columns: repeat(1, 0.27fr); */
+  /* grid-template-rows: repeat(1, 0.5fr); */
+  justify-content: center;
+  align-content: center;
+  padding: 1em;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  justify-items: stretch;
+  align-content: center;
+  padding: 2em;
+  width:19em;
+  gap:2em;
+}
+/* input,button{
+    border:1px solid black;
+} */
+
+h1{
+    text-align: center;
+
+    position:relative;
+    display: block;
+    /* background:linear-gradient(red,rgb(128, 0, 64)); */
+    /* color:transparent; */
+    /* background-clip: text; */
+
+}
+
+
+input{
+    text-transform: initial;
+}

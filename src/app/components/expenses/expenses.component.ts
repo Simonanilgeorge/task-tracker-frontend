@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormArray, FormGroup } from '@angular/forms';
 
 import { ExpensesService } from '../../services/expenses.service'
+import {LoginService} from '../../services/login.service'
 
 @Component({
   selector: 'app-expenses',
@@ -45,10 +46,13 @@ export class ExpensesComponent implements OnInit {
     fruits: this.fb.array([])
   })
 
-  constructor(private fb: FormBuilder, private expensesService: ExpensesService) { }
+  constructor(private fb: FormBuilder, private expensesService: ExpensesService,private loginService:LoginService) { }
+
 
   ngOnInit(): void {
+    this.loginService.checkSessionStorage()
     this.getAllExpenses()
+
   }
 
   get fruits() {
