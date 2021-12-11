@@ -50,7 +50,7 @@ export class ExpensesComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.loginService.checkSessionStorage()
+    // this.loginService.checkSessionStorage()
     this.getAllExpenses()
 
   }

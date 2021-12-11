@@ -35,12 +35,7 @@ export class LoginService {
   }
 
 checkSessionStorage(){
-  if(sessionStorage.getItem("token")){
-    return
-  }
-  else{
-    this.router.navigate(["/"])
-  }
+  return !!sessionStorage.getItem("token")
 }
 
   logout() {

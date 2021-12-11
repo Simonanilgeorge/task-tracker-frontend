@@ -74,7 +74,7 @@ export class StocksComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.loginService.checkSessionStorage()
+    // this.loginService.checkSessionStorage()
     this.getAllStocks()
 
   }
