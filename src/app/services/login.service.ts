@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders,HttpInterceptor} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
@@ -27,11 +27,8 @@ export class LoginService {
   }
 
   testGetRegister() {
-    let header = {
-      headers: new HttpHeaders()
-        .set('Authorization', `Bearer ${sessionStorage.getItem("token")}`)
-    }
-    return this.http.get(this.registerUrl, header)
+
+    return this.http.get(this.registerUrl)
   }
 
 checkSessionStorage(){
