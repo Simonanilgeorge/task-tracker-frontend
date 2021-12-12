@@ -1,6 +1,6 @@
 .grid-container {
   flex: 1;
-background: linear-gradient(145deg, orange 0% 50%,white 50% 100%);
+background: linear-gradient(145deg, orange,firebrick 50%,white 50%);
 
   display: grid;
   /* grid-template-columns: repeat(1, 0.27fr); */

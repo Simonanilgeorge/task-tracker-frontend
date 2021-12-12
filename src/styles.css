@@ -97,7 +97,7 @@ border:none;
 filter:brightness(0.8)
 } */
 
-.disabled {
+button[disabled] {
   opacity: 0.6;
   pointer-events: none;
 }

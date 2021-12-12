@@ -9,7 +9,7 @@
                 <input type="password" formControlName="password" placeholder="Password">
 
                 <small style="color:rgb(29, 84, 129);cursor: pointer;" (click)="registerFlag=true">Not a user?.Click to register</small>
-                <button class="button submit" (click)="login()">login</button>
+                <button class="button submit" (click)="login()" [disabled]="!form.valid">login</button>
 
             </div>
         </span>
@@ -21,7 +21,7 @@
                 <input type="password" formControlName="confirmPassword" placeholder="Confirm Password">
                 <small style="color:red;" *ngIf="confirmPassword.dirty && registerPassword.value!=confirmPassword.value">Passwords do not match</small>
                 <small style="color:rgb(29, 84, 129);cursor: pointer;" (click)="registerFlag=false">Login</small>
-                <button class="button submit" (click)="registerUser()">register user</button>
+                <button class="button submit" (click)="registerUser()" [disabled]="!registerUserForm.valid">register user</button>
             </div>
         </span>
     </div>

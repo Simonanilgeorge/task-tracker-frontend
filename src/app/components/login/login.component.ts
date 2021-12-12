@@ -64,24 +64,25 @@ export class LoginComponent implements OnInit {
   registerUser(){
 
     this.loginService.register(this.registerUserForm.getRawValue()).subscribe((res)=>{
-      this.showToastMessage("User added",res.message)
-      this.registerFlag=false
+      if(res.message=="success"){
+        this.showToastMessage("User added",res.message)
+        this.registerFlag=false
+        this.registerUserForm.reset()
+      }
+      else{
+        this.showToastMessage(res.message,"danger")
+      }
     })
-
-  
-
   }
 
 
     // set attributes for toast message
     showToastMessage(message, severity) {
-
       // to detect changes use stringify
       this.toast = JSON.parse(JSON.stringify({
         message: message,
         severity: severity,
         active: true
       }))
-  
     }
 }

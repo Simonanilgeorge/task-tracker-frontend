@@ -11,11 +11,11 @@ export class AuthGuard implements CanActivate {
 
 
   canActivate():boolean{
+    
   if(this.loginService.checkSessionStorage()){
     return true
   }
   else{
-
     this.router.navigate(['/'])
     return false
   }
