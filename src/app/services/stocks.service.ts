@@ -13,6 +13,7 @@ export class StocksService {
 
 
   getAllStocks(): Observable<any> {
+    
     return this.http.get<any>(this.url);
   }
 

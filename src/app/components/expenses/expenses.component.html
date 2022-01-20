@@ -16,19 +16,14 @@
 
             <button class="button default" (click)="test()">test</button>
 
-
-            
             <div *ngIf="editFlag" style="display: flex;gap:1em;">
                 <button class="button submit" (click)="edit()" [class.disabled]="!form.valid" [disabled]="!form.valid">
                     update expense
                 </button>
-
                 <button class="button default" (click)="cancelEdit()">
                     cancel
                 </button>
             </div>
-
-
         </div>
 
         <div class="table-container card">

@@ -11,11 +11,15 @@
 :root {
   --light: 50%;
   --dark: 40%;
-  --navbar-bg: #ffbb00;
-  --table-header-bg: #ffbb00;
-  --button-submit: hsl(120deg 100% 25%);
-  --button-default: hsl(207deg 44% 49%);
-  --table-header-color:#661c17;
+  --navbar-bg: #004733;
+  --nav-link:#ffffff;
+  --table-header-bg: #AD080F;
+  --button-submit: #568D66;
+  --button-default: #023047;
+  --table-header-color:#ffffff;
+  --login-bg-primary:red;
+  --login-bg-secondary:firebrick;
+  --grid-container-bg:#ffffff;
 }
 
 *:focus {
@@ -24,10 +28,14 @@
 }
 .container {
   min-height: 100vh;
-
+/* background: #9A031E; */
   display: flex;
 
   flex-direction: column;
+}
+
+.grid-container{
+background: var(--grid-container-bg);
 }
 
 .card {
